@@ -17,46 +17,21 @@ def main():
         return  # Exit the function if salary input is invalid
 
     try:
-        # Compute various salary deductions using functions from the utils module
+        # Compute total deductions and breakdown
+        total_deductions, sss, philhealth, pagibig, tax = utils.compute_total_deductions(salary)
+        
+        # Compute net salary
+        net_salary = utils.compute_net_salary(salary, total_deductions)
+        
+        # Check if deductions exceed salary
+        if net_salary < 0:
+            raise ValueError("Total deductions exceed the salary. Please check the deduction rates.")
 
-        # Compute SSS (Social Security System) contribution
-        sss = utils.compute_sss()
-
-        # Compute PhilHealth (health insurance) contribution based on the salary
-        philhealth = utils.compute_philhealth(salary)
-
-        # Compute Pag-IBIG (Home Development Mutual Fund) contribution
-        pagibig = utils.compute_pagibig()
-
-        # Compute tax deductions based on applicable tax rates
-        tax = utils.compute_tax()
-
-        # Ensure all deduction values are valid (i.e., not None or unexpected values)
-        if any(v is None for v in [sss, philhealth, pagibig, tax]):
-            raise ValueError("One of the deduction calculations returned an invalid value.")
-    
     except Exception as e:
-        # Handle any errors that may occur during deduction calculations
         print(f"Error during deduction calculation: {e}")
         return  # Exit the function if an error occurs in deduction computations
 
-    try:
-        # Calculate the total amount of deductions from the salary
-        deductions = sss + philhealth + pagibig + tax
-        
-        # Compute the net salary after all deductions have been applied
-        net_salary = salary - deductions
-        
-        # Check if the deductions exceed the gross salary, which shouldn't happen
-        if net_salary < 0:
-            raise ValueError("Total deductions exceed the salary. Please check the deduction rates.")
-    
-    except ValueError as e:
-        # Handle cases where the net salary calculation results in an error
-        print(f"Error: {e}")
-        return  # Exit the function if there is an issue in calculations
-
-    # Display the salary breakdown to the user if all calculations were successful
+    # Display the salary breakdown to the user
     print("\nSalary Breakdown:")
     print("-----------------------------")
     print("Gross Salary:      ", salary)
@@ -65,7 +40,7 @@ def main():
     print("Pag-IBIG Deduction:", pagibig)
     print("Tax Deduction:     ", tax)
     print("-----------------------------")
-    print("Total Deductions:  ", deductions)
+    print("Total Deductions:  ", total_deductions)
     print("Net Salary:        ", net_salary)
     print("-----------------------------")
 

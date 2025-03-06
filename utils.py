@@ -16,3 +16,17 @@ def compute_pagibig():
 # This function returns a fixed tax amount for now
 def compute_tax():
     return 1875  # Fixed tax deduction
+
+# Function to compute total deductions and return individual deductions
+def compute_total_deductions(salary):
+    sss = compute_sss()
+    philhealth = compute_philhealth(salary)
+    pagibig = compute_pagibig()
+    tax = compute_tax()
+    
+    total_deductions = sss + philhealth + pagibig + tax
+    return total_deductions, sss, philhealth, pagibig, tax
+
+# Function to compute net salary
+def compute_net_salary(salary, deductions):
+    return salary - deductions
