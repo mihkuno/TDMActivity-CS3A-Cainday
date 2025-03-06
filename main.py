@@ -1,8 +1,12 @@
-def compute_deductions(salary):
-    sss = 1200
-    philhealth = (salary * 0.05) / 2
-    pagibig = 100
-    tax = 1875 # Assuming fixed value for simplicity
+from utils import *
+
+def main():
+    salary = float(input("Enter your monthly salary: "))
+    
+    sss = compute_sss()
+    philhealth = compute_philhealth(salary)
+    pagibig = compute_pagibig()
+    tax = compute_tax()
 
     deductions = sss + philhealth + pagibig + tax
     net_salary = salary - deductions
@@ -15,5 +19,9 @@ def compute_deductions(salary):
     print("Total Deductions:", deductions)
     print("Net Salary:", net_salary)
 
-salary = float(input("Enter your monthly salary: "))
-compute_deductions(salary)
+
+if __name__ == "__main__":
+    main()
+
+
+
