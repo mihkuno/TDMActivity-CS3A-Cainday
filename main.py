@@ -1,4 +1,4 @@
-from utils import *
+import utils
 
 def main():
     try:
@@ -16,10 +16,10 @@ def main():
     
     try:
         # Calculate deductions
-        sss = compute_sss()
-        philhealth = compute_philhealth(salary)
-        pagibig = compute_pagibig()
-        tax = compute_tax()
+        sss = utils.compute_sss()
+        philhealth = utils.compute_philhealth(salary)
+        pagibig = utils.compute_pagibig()
+        tax = utils.compute_tax()
         
         # Ensure the returned values are valid numbers (just in case the computation functions return None)
         if any(v is None for v in [sss, philhealth, pagibig, tax]):
